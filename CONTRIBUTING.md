@@ -4,6 +4,11 @@ Thanks for your interest. This is currently a solo hobbyist project run at
 professional-engineering rigor, so the process below applies whether you're
 the maintainer working alone or an outside contributor.
 
+This project follows [Eric's Engineering Constitution](constitution/CONSTITUTION.md);
+these project-specific ground rules take priority over its universal
+defaults where they differ (`constitution/INTEGRATION.md`). AI agents:
+also read `AGENTS.md` and `constitution/AI_WORKFLOW.md` before starting.
+
 ## Ground rules
 
 1. **PiKVM is the critical service.** Any change that touches power, ATX

@@ -1,3 +1,6 @@
+# Universal baseline hooks per Eric's Engineering Constitution
+# (constitution/INTEGRATION.md "Pre-Commit Hooks"); language-specific
+# hooks for this project are appended below.
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
@@ -5,6 +8,7 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+      - id: check-json
       - id: check-added-large-files
         args: ["--maxkb=2048"]
       - id: check-merge-conflict

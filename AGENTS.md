@@ -5,6 +5,32 @@ contributors too) working in this repository. It supersedes generic
 helpfulness with project-specific safety rules, because this project
 controls real electrical hardware attached to a live desktop PC.
 
+## Governance: Eric's Engineering Constitution
+
+This repository also follows
+[Eric's Engineering Constitution](constitution/CONSTITUTION.md) (installed
+as the read-only `constitution/` submodule — never edit files inside it
+directly). Where the constitution's universal defaults and this file's
+project-specific rules conflict, **this file wins**
+(`constitution/INTEGRATION.md`). Before making changes, also read:
+
+- `constitution/CONSTITUTION.md` — universal principles
+- `constitution/AI_WORKFLOW.md` — required step-by-step workflow
+- `constitution/TESTING.md`, `constitution/DOCUMENTATION.md`, `constitution/SECURITY.md`
+- `TODO.md`, `CHANGELOG.md` — for project context, alongside the docs below
+
+**Project-specific override**: this repository's Architecture Decision
+Records live in [`docs/decisions/`](docs/decisions/), not the
+constitution's default `docs/adr/` — see
+[`docs/adr/0001-record-architecture-decisions.md`](docs/adr/0001-record-architecture-decisions.md)
+for why. `docs/adr/` exists only as a pointer.
+
+**gstack skill note**: `CLAUDE.md` (installed by the constitution
+bootstrap) references gstack skills (`/browse`, `/setup-gbrain`, etc.).
+These require gstack to be installed in the agent's environment
+separately — if they aren't available, fall back to this repository's own
+tools/skills rather than blocking on them.
+
 ## Project purpose (short form)
 
 Murderbot Service Core (MSC) is an internal Raspberry Pi 4–based management
@@ -65,6 +91,8 @@ A change is done when:
       diff, not just filenames).
 - [ ] If an architectural decision changed, a new/updated ADR exists in
       `docs/decisions/`.
+- [ ] `TODO.md` reflects discovered work and completed roadmap items
+      (`constitution/CONSTITUTION.md` Principle 3).
 
 ## Non-goals reminder (first release, i.e. through end of Phase 4/5)
 

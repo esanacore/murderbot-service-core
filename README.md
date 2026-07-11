@@ -1,5 +1,9 @@
 # Murderbot Service Core (MSC)
 
+<!-- CONSTITUTION_START -->
+[![Eric's Engineering Constitution](https://img.shields.io/badge/Eric's%20Engineering%20Constitution-Adopted-blue)](https://github.com/esanacore/engineering-constitution)
+<!-- CONSTITUTION_END -->
+
 An embedded, Raspberry Pi–based service processor that lives inside a desktop
 PC ("Murderbot": MSI Z490-A PRO / Intel Core i7-10700 / RTX 4080) and provides
 enterprise-style out-of-band management — in the spirit of Dell iDRAC, HP
@@ -68,6 +72,30 @@ murderbot-service-core/
 └── .github/          CI, issue/PR/discussion templates
 ```
 
+## Component overview
+
+```mermaid
+flowchart TB
+    PSU["ATX PSU"] -->|"5VSB, protected"| PIKVM
+    PSU -->|"main 5V, host-on only"| ACC["Audio + RGB accessories"]
+
+    subgraph PIBOX["Raspberry Pi 4"]
+        PIKVM["PiKVM core\n(critical)"]
+        CORE["murderbot-core\n(state machine, events)"]
+        ATX["ATX interface\n(isolated, fail-open)"]
+    end
+
+    GPU["RTX 4080 video out"] --> PIKVM
+    CORE -->|events| ACC
+    ATX -->|"isolated pulses"| HEADERS["Motherboard PWR/RESET"]
+
+    classDef critical fill:#b91c1c,color:#fff,stroke:#7f1d1d;
+    class PIKVM,ATX critical
+```
+
+Full diagram with the state model, failure domains, and power topology:
+[`docs/architecture.md`](docs/architecture.md).
+
 ## Engineering philosophy
 
 Reliability > Maintainability > Simplicity > Expandability > Performance >
@@ -107,7 +135,9 @@ hardware and are not part of `pytest` today).
 | See the longer-term roadmap | [`ROADMAP.md`](ROADMAP.md) |
 | Contribute | [`CONTRIBUTING.md`](CONTRIBUTING.md), [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) |
 | Report a security issue | [`SECURITY.md`](SECURITY.md) |
-| Get help | [`SUPPORT.md`](SUPPORT.md) |
+| Get help | [`SUPPORT.md`](SUPPORT.md), [`HELP.md`](HELP.md) |
+| See living TODO / discovered work | [`TODO.md`](TODO.md) |
+| Understand the governance framework this repo follows | [`constitution/CONSTITUTION.md`](constitution/CONSTITUTION.md) |
 
 ## License
 

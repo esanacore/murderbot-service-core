@@ -1,5 +1,12 @@
 # Security Policy
 
+This project also follows
+[Eric's Engineering Constitution Security Standards](constitution/SECURITY.md)
+(Principle 5) — including its threat-modeling triggers for new egress
+paths, new auth/authz surfaces, and new trust-sensitive dependencies. This
+document is the project-specific policy required by that framework; where
+the two differ, this document governs (`constitution/INTEGRATION.md`).
+
 ## Scope
 
 Murderbot Service Core (MSC) is a management controller with remote,
