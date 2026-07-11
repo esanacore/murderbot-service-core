@@ -17,6 +17,11 @@ a `v0.1.0` tag is cut — see `docs/versioning-and-releases.md`.
   gstack (including the `/browse` Playwright workaround for this
   machine's Ubuntu 26.04), goose CLI, and goosetown (cloned to
   `~/Repos/goosetown`) are all installed and verified on this machine.
+- `constitution/` submodule bumped to v1.32.0, which adds
+  `constitution/scripts/setup-machine.sh` — a one-time, per-machine
+  installer for Bun/gstack/goose/goosetown, idempotent, deliberately
+  kept separate from `bootstrap.sh`. Ran it here as a sanity check;
+  correctly detected everything already installed and skipped cleanly.
 - Initial repository scaffold: documentation set (`docs/`), governance
   files, `.github/` templates and CI, hardware-independent `murderbot_core`
   Python package skeleton (event types, state machine, config parsing,
