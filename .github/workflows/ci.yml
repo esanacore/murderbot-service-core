@@ -39,17 +39,26 @@ jobs:
     name: Markdown / link check
     runs-on: ubuntu-latest
     steps:
+      # submodules: true - many docs/*.md and root governance files link
+      # into constitution/*.md; without it those links 404 against an
+      # empty directory and every PR fails spuriously.
       - uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: Lint markdown
         uses: DavidAnson/markdownlint-cli2-action@v16
         with:
-          globs: "**/*.md"
+          globs: |
+            **/*.md
+            !constitution/**
         continue-on-error: true
 
       - name: Check links
         uses: lycheeverse/lychee-action@v1
         with:
-          args: --no-progress --exclude-mail "**/*.md"
+          # constitution/ is a submodule with its own CI; only check this
+          # repository's own docs, not the constitution's.
+          args: --no-progress --exclude-mail --exclude-path constitution "**/*.md"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
