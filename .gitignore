@@ -13,6 +13,12 @@ configs/*.yml
 **/*.pem
 **/*.key
 !electronics/**/*.key.svg
+**/credentials.json
+**/*serviceaccount*.json
+**/*service-account*.json
+**/.netrc
+**/terraform.tfstate
+**/terraform.tfstate.backup
 
 # --- Licensed / user-supplied media (see assets/README.md) ---
 assets/*
