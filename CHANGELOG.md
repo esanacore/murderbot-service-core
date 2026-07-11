@@ -10,6 +10,12 @@ a `v0.1.0` tag is cut — see `docs/versioning-and-releases.md`.
 
 ### Added
 
+- `CLAUDE.md` and `.goosehints` now carry real, verified install
+  instructions for gstack (`garrytan/gstack`) and goose/goosetown
+  (`aaif-goose` org) instead of only naming the tools, matching the fix
+  landed upstream in `constitution/` v1.31.0. Installed and verified
+  locally: Bun, gstack (including the `/browse` Playwright workaround for
+  this machine's Ubuntu 26.04), goose CLI.
 - Initial repository scaffold: documentation set (`docs/`), governance
   files, `.github/` templates and CI, hardware-independent `murderbot_core`
   Python package skeleton (event types, state machine, config parsing,

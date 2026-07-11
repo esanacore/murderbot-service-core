@@ -2,6 +2,30 @@
 
 This repository follows [Eric's Engineering Constitution](constitution/CONSTITUTION.md). Apply it on every task, including when goose runs under a multi-agent orchestrator such as goosetown.
 
+## Installing goose and goosetown
+
+Neither ships with this repository — both are separate CLI tools you run
+this repo's work through. If `goose --version` fails:
+
+```bash
+# goose CLI (org is aaif-goose, formerly published under block/)
+curl -fsSL https://github.com/aaif-goose/goose/releases/download/stable/download_cli.sh | bash
+```
+
+For multi-agent orchestration (a flock of goose delegates working in
+parallel — researchers, workers, writers, reviewers):
+
+```bash
+git clone https://github.com/aaif-goose/goosetown.git
+cd goosetown && ./goose
+```
+
+goosetown requires goose v1.25.0+ already installed. See
+[aaif-goose/goose](https://github.com/aaif-goose/goose) and
+[aaif-goose/goosetown](https://github.com/aaif-goose/goosetown) for full
+docs — their own READMEs still say `block/...` in places (pre-rename;
+GitHub redirects it, but clone the `aaif-goose/...` URL directly).
+
 ## Required Reading
 
 Before making changes, read:
@@ -16,7 +40,9 @@ Before making changes, read:
 - Follow the workflow in `constitution/AI_WORKFLOW.md` for every task.
 - Add or update tests for behavioral changes; evaluate coverage and record gaps.
 - Update `TODO.md` and `CHANGELOG.md` as part of every change.
-- Record major design decisions in `docs/adr/`.
+- Record major design decisions in `docs/decisions/` (this project's ADR
+  location — overrides the constitution default of `docs/adr/`; see
+  `docs/adr/0001-record-architecture-decisions.md` for why).
 - Review security impact before completing work.
 
 ## Multi-Agent Orchestration (goosetown)

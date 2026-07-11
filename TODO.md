@@ -46,6 +46,13 @@ is canonical for hardware-phase sequencing; update both in the same change.
 - [ ] Record the PiKVM image version/checksum in `docs/pikvm-setup.md` once
       Phase 0 flashing happens.
 
+## Tooling
+
+- [ ] Install goose CLI + goosetown on this machine (blocked on an explicit
+      per-command approval from the Claude Code safety classifier, not on
+      anything technical — see `.goosehints` for the install commands).
+      Bun and gstack are already installed and verified working.
+
 ## Nice-to-Have
 
 - [ ] OLED status display, environmental monitoring, plugin architecture,
