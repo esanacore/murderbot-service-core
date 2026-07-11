@@ -1,0 +1,9 @@
+[Unit]
+Description=Murderbot Service Core self-test (triggered by murderbot-health.timer)
+# Not installed/enabled automatically - see AGENTS.md rule 3.
+
+[Service]
+Type=oneshot
+User=murderbot
+# Entrypoint module not yet implemented.
+ExecStart=/opt/murderbot/services/.venv/bin/python -m murderbot_core.health_check

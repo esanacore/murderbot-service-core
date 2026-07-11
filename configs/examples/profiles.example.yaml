@@ -1,0 +1,21 @@
+# Example profiles.yaml - copy to a real (untracked) config path.
+# Schema matches services/src/murderbot_core/config.py::load_profiles.
+#
+# audio_clip values reference filenames the operator has installed
+# locally (see assets/README.md) - they are never shipped in this repo.
+
+profiles:
+  windows:
+    audio_clip: startup_windows.wav   # placeholder filename - operator-supplied, not committed
+    rgb_animation: boot_blue
+  linux:
+    audio_clip: startup_linux.wav     # placeholder filename - operator-supplied, not committed
+    rgb_animation: boot_green
+  unknown_host:
+    # Conservative default profile used when telemetry can't identify the
+    # host OS (docs/software.md "State model").
+    audio_clip: null
+    rgb_animation: boot_neutral
+  fault:
+    audio_clip: null
+    rgb_animation: null   # RGB defaults off on fault - see docs/architecture.md

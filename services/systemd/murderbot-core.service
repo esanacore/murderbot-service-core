@@ -1,0 +1,19 @@
+[Unit]
+Description=Murderbot Service Core - state machine and event routing
+# Not installed/enabled automatically - see AGENTS.md rule 3.
+After=network.target
+
+[Service]
+Type=simple
+User=murderbot
+# ExecStart's target module (murderbot_core.core_service) does not exist
+# yet - only the library (state machine/events/config) is implemented so
+# far. This unit is an example for Phase 2+ wiring, not yet installable.
+ExecStart=/opt/murderbot/services/.venv/bin/python -m murderbot_core.core_service
+Restart=on-failure
+RestartSec=2
+# Owns no direct hardware writes beyond the ATX interface abstraction -
+# see docs/architecture.md failure-domain table.
+
+[Install]
+WantedBy=multi-user.target

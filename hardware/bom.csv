@@ -1,0 +1,14 @@
+category,item,manufacturer,part_number,quantity,target_price,actual_price,source,status,already_owned,phase,notes
+compute,"Raspberry Pi 4 Model B, 2GB or 4GB",Raspberry Pi Foundation,TBD,1,$35-70 used/new,,TBD,not purchased,TBD,0,Pricing is volatile; used 2GB is the value target. See docs/decisions/0001-service-core-architecture.md.
+capture,HDMI-to-CSI bridge compatible with PiKVM,TBD,TBD,1,$18-30,,TBD,not purchased,TBD,0,Confirm cable orientation and Pi 4 compatibility before purchase.
+storage,"High-endurance microSD, 16-32 GB",TBD,TBD,1,$7-12,,TBD,not purchased,TBD,0,Keep image backups and configuration exports (docs/pikvm-setup.md).
+power,Protected 5V power input / DC wiring,TBD,TBD,1,$5-15,,TBD,not purchased,TBD,0-1,Fuse connectors wire and optional conversion stage; see docs/power-design.md.
+capture,USB OTG/data isolation or approved PiKVM cable arrangement,TBD,TBD,1,$3-12,,TBD,not purchased,TBD,1,Avoid unintended power backfeed; see docs/pikvm-setup.md.
+atx,Optocouplers / transistor components for PWR and RESET,TBD,TBD,2+,$2-6,,TBD,not purchased,TBD,2,Include pull resistors and default-open (fail-open) behavior.
+atx,Front-panel pass-through connectors and harness,TBD,TBD,1,$3-10,,TBD,not purchased,TBD,2,Preserve physical case buttons; see docs/wiring.md.
+audio,MAX98357A-compatible I2S amplifier,Adafruit,3006,1,$3-7,,TBD,not purchased,TBD,3,Approximately 3W class output. https://www.adafruit.com/product/3006
+audio,"40-50mm full-range speaker",TBD,TBD,1,$3-8,,TBD,not purchased,TBD,3,4 or 8 ohm; printed enclosure recommended (cad/).
+rgb,74AHCT125 level shifter,Adafruit,1787,1,$1-3,,TBD,not purchased,TBD,4,One channel used initially; spare channels remain. https://www.adafruit.com/product/1787
+rgb,"WS2812B/NeoPixel strip, initial 30 LEDs or fewer",TBD,TBD,1,$7-15,,TBD,not purchased,TBD,4,Start short and enforce brightness limits (docs/power-design.md).
+passive/misc,"Capacitors, resistors, fuses, JST connectors, perfboard",TBD,TBD,lot,$8-20,,TBD,not purchased,TBD,2-4,Many parts may already be on hand - update already_owned per part as acquired.
+mechanical,Cooling and custom internal mounting,TBD,TBD,1,$0-15,,TBD,not purchased,TBD,1-4,Reuse heatsink/fan where practical; print brackets (cad/).

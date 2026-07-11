@@ -1,0 +1,36 @@
+name: Software feature request
+description: Propose new software functionality (services/, host-agents/, tooling).
+title: "[feature] "
+labels: ["enhancement", "software"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach
+      description: How this fits the existing event-bus / Protocol-interface architecture (see docs/software.md).
+    validations:
+      required: true
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Which roadmap phase does this belong to?
+      description: See ROADMAP.md.
+      options:
+        - Phase 0-5 (core, pre-1.0)
+        - Post-1.0
+        - Not sure
+    validations:
+      required: true
+  - type: checkboxes
+    id: isolation
+    attributes:
+      label: Failure-domain check
+      options:
+        - label: I've confirmed this cannot introduce a dependency from PiKVM/ATX control onto this new feature (docs/architecture.md)
+          required: true

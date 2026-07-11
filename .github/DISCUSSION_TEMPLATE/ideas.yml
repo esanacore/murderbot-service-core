@@ -1,0 +1,15 @@
+title: "[idea] "
+labels: ["idea"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea
+      description: A feature, phase-plan change, or design idea that isn't a concrete enough proposal for an issue yet.
+    validations:
+      required: true
+  - type: textarea
+    id: fit
+    attributes:
+      label: How does this fit the roadmap?
+      description: Reference ROADMAP.md phase, or explain why it's a new direction.

@@ -1,0 +1,34 @@
+name: Hardware validation task/result
+description: Track or report a measurement, pinout confirmation, or bench test needed to close a TBD in docs/power-design.md, docs/wiring.md, or docs/testing.md.
+title: "[hardware] "
+labels: ["hardware", "validation"]
+body:
+  - type: textarea
+    id: tbd
+    attributes:
+      label: Which TBD / open item does this address?
+      description: Quote or link the exact row in docs/power-design.md, docs/wiring.md, or docs/backlog.md.
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Measurement / verification method
+      description: Instrument used, procedure, or manual/datasheet citation.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Result (if reporting a completed measurement)
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Link to photo/scope-capture under docs/images/, or describe what evidence will be attached.
+  - type: checkboxes
+    id: docs
+    attributes:
+      label: Documentation follow-through
+      options:
+        - label: I will update (or have updated) the relevant docs/*.md table row, not just report the number here

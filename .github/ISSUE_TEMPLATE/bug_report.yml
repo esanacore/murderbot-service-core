@@ -1,0 +1,45 @@
+name: Defect / bug report
+description: Something in the software or documentation is wrong or broken.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you expected instead.
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - murderbot-core (state machine/events)
+        - murderbot-audio
+        - murderbot-rgb
+        - murderbot-telemetry
+        - host-agents
+        - docs
+        - CI / tooling
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: Pi model, PiKVM image version, OS, relevant config (redact secrets).
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety impact
+      options:
+        - label: This bug affects PiKVM availability or ATX control
+        - label: This bug could cause an unsafe electrical/thermal condition

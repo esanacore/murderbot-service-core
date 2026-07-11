@@ -1,0 +1,13 @@
+title: "[show and tell] "
+labels: ["show-and-tell"]
+body:
+  - type: textarea
+    id: whatbuilt
+    attributes:
+      label: What did you build/change?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Photos / logs / results

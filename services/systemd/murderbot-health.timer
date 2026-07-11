@@ -1,0 +1,11 @@
+[Unit]
+Description=Periodic Murderbot Service Core self-test and status summary
+# Not installed/enabled automatically - see AGENTS.md rule 3.
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=15min
+Unit=murderbot-health.service
+
+[Install]
+WantedBy=timers.target

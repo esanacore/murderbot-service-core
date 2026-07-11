@@ -1,0 +1,55 @@
+# --- Secrets & machine-specific config (never commit) ---
+configs/*.yaml
+configs/*.yml
+!configs/examples/*.yaml
+!configs/examples/*.yml
+*.env
+.env.*
+**/secrets/
+**/*_secret*
+**/*credential*
+**/id_rsa*
+**/id_ed25519*
+**/*.pem
+**/*.key
+!electronics/**/*.key.svg
+
+# --- Licensed / user-supplied media (see assets/README.md) ---
+assets/*
+!assets/README.md
+!assets/**/.gitkeep
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+
+# --- Node (docs tooling, if added) ---
+node_modules/
+
+# --- OS / editor cruft ---
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# --- CAD / EDA build artifacts ---
+*-backups/
+*.bak
+electronics/**/*-cache.lib
+electronics/**/*.net
+cad/**/*.stl.bak
+
+# --- Docs build output ---
+site/

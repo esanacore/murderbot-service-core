@@ -1,0 +1,14 @@
+title: "[question] "
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: What have you already checked?
+      description: docs/troubleshooting.md, existing issues/discussions, etc.

@@ -1,0 +1,16 @@
+# Example hardware.yaml - copy to a real (untracked) config path on the
+# deployed Pi and fill in real values. Do not commit the real file - see
+# ../../.gitignore and ../../docs/security.md.
+#
+# Schema matches services/src/murderbot_core/config.py::load_hardware_config.
+# Defaults (if a key is omitted) are the safe/disabled values shown here.
+
+atx_enabled: false      # true once the optoisolated PWR/RESET interface is bench-proven (Phase 2)
+rgb_enabled: false      # true once the level-shifted NeoPixel output is bench-proven (Phase 4)
+audio_enabled: false    # true once the I2S amplifier is bench-proven (Phase 3)
+telemetry_enabled: false  # true once an authenticated host-agent feed exists (post-1.0)
+
+# Fraction of full brightness, 0.0-1.0. Real value is TBD pending current
+# measurements at several brightness settings - see docs/power-design.md.
+# 0.0 (fully off) is the safe default until that measurement exists.
+rgb_brightness_cap: 0.0

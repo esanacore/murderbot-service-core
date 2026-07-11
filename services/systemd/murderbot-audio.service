@@ -1,0 +1,18 @@
+[Unit]
+Description=Murderbot Service Core - startup audio playback
+# Not installed/enabled automatically - see AGENTS.md rule 3.
+After=murderbot-core.service sound.target
+Wants=murderbot-core.service
+
+[Service]
+Type=simple
+User=murderbot
+# Entrypoint module not yet implemented - example for Phase 3 wiring.
+ExecStart=/opt/murderbot/services/.venv/bin/python -m murderbot_core.audio_service
+Restart=on-failure
+RestartSec=2
+# Must remain muted/off if unavailable - never blocks murderbot-core or
+# PiKVM (docs/architecture.md failure-domain table).
+
+[Install]
+WantedBy=multi-user.target

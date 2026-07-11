@@ -1,0 +1,12 @@
+# Example logging.yaml.
+#
+# NOT YET CONSUMED BY CODE: services/src/murderbot_core/logging_setup.py
+# currently takes its level as a Python argument
+# (configure_logging(level=...)) rather than reading this file. This
+# example documents the intended eventual schema so the config-file
+# story stays consistent with docs/software.md's package layout; wiring
+# logging_setup.py to read it is tracked in docs/backlog.md.
+
+level: INFO   # DEBUG | INFO | WARNING | ERROR
+destinations:
+  - stdout   # captured by journald when run under systemd

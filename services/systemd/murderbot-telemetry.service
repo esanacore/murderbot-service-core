@@ -1,0 +1,19 @@
+[Unit]
+Description=Murderbot Service Core - optional host telemetry
+# Not installed/enabled automatically - see AGENTS.md rule 3.
+After=murderbot-core.service network.target
+Wants=murderbot-core.service
+
+[Service]
+Type=simple
+User=murderbot
+# Entrypoint module not yet implemented - example for a post-Phase-5 /
+# host-agents/ wiring milestone (ROADMAP.md).
+ExecStart=/opt/murderbot/services/.venv/bin/python -m murderbot_core.telemetry_service
+Restart=on-failure
+RestartSec=5
+# Entirely optional - system remains fully useful without it
+# (docs/architecture.md "Host agent" row).
+
+[Install]
+WantedBy=multi-user.target
