@@ -18,6 +18,7 @@ project-specific rules conflict, **this file wins**
 - `constitution/AI_WORKFLOW.md` — required step-by-step workflow
 - `constitution/TESTING.md`, `constitution/DOCUMENTATION.md`, `constitution/SECURITY.md`
 - `TODO.md`, `CHANGELOG.md` — for project context, alongside the docs below
+- Consult and extend the session log — before planning, read the newest rows of `docs/sessions/README.md` and search `docs/sessions/` for earlier sessions on the same topic (`bash constitution/scripts/find_sessions.sh <keyword>`), reading the ones that match; before completing non-trivial work, add this session's summary there (request, context, decisions, discoveries, outcome — a summary, never a transcript, and never a secret) and list it in the index (`constitution/AI_WORKFLOW.md`, "Session Summaries").
 
 **Project-specific override**: this repository's Architecture Decision
 Records live in [`docs/decisions/`](docs/decisions/), not the
