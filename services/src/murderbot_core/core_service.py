@@ -69,9 +69,10 @@ def build_core(
     try:
         configure_logging(path=logging_path)
     except LoggingConfigError as exc:
-        # Fall back to defaults and warn; the service still starts.
-        logging.basicConfig(level=logging.WARNING)
-        logging.getLogger(__name__).warning("falling back to default logging: %s", exc)
+        # Fall back to the documented safe defaults (INFO, stdout) and
+        # warn; the service still starts and stays observable.
+        configure_logging()
+        logger.warning("falling back to default logging: %s", exc)
 
     hardware = load_hardware_config(hardware_path)
     profiles = load_profiles(profiles_path)
@@ -116,7 +117,8 @@ def main(argv: list[str] | None = None) -> int:
     logger.info("murderbot-core running; host state=%s", machine.state.value)
     # The real service blocks here on the event loop of its transport
     # (PiKVM GPIO daemon, host-agent socket, ...). That wiring is not
-    # implemented yet — see docs/software.md "What's implemented today".
+    # implemented yet, so today the process sets up, logs, and exits 0 —
+    # see docs/software.md "What's implemented today".
     return 0
 
 
