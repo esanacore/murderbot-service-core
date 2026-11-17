@@ -19,12 +19,23 @@ is canonical for hardware-phase sequencing; update both in the same change.
 
 ## Technical Debt
 
-- [ ] `services/systemd/*.service` reference entrypoint modules
-      (`murderbot_core.core_service`, `.audio_service`, `.rgb_service`,
-      `.telemetry_service`, `.health_check`) that don't exist yet — only the
-      library layer is implemented. See `docs/software.md`.
-- [ ] `logging_setup.py` doesn't yet read `configs/examples/logging.example.yaml`'s
-      schema — see `docs/backlog.md` P3 item.
+- [x] `services/systemd/murderbot-core.service`'s entrypoint module
+      `murderbot_core.core_service` is implemented (config load + bus +
+      state machine + transition logging). See `docs/software.md`.
+- [ ] The other `services/systemd/*.service` units still reference
+      entrypoint modules that don't exist (`murderbot_core.audio_service`,
+      `.rgb_service`, `.telemetry_service`, `.health_check`) — each lands
+      with its roadmap phase (`AGENTS.md` rule 9).
+- [ ] `murderbot_core.core_service.main()` has no transport event loop
+      yet: it sets up, logs, and exits 0. Blocking on a real event source
+      (PiKVM GPIO daemon / host-agent socket) is Phase 2+ work; until
+      then `murderbot-core.service` must not be enabled on a device.
+- [ ] `hardware.yaml`'s `*_enabled` flags are parsed but not yet consumed
+      by any code path (`docs/software.md` note) — the first real backend
+      must gate on them.
+- [x] `logging_setup.py` reads `configs/examples/logging.example.yaml`'s
+      schema (`level`, `destinations`) and is covered by
+      `tests/test_logging.py`. See `docs/backlog.md` P3 item.
 
 ## Refactoring
 
@@ -36,8 +47,11 @@ is canonical for hardware-phase sequencing; update both in the same change.
 - [ ] Bench/integration/fault-injection test matrix in `docs/testing.md` is
       entirely unexecuted (pre-hardware-bring-up). Each row needs evidence
       recorded once Phase 1+ starts.
-- [ ] GAP-005 (`docs/TEST_PLAN.md`): `logging_setup.py` has 0% test
-      coverage — add a test once it does more than wrap `logging.basicConfig`.
+- [x] GAP-005 (`docs/TEST_PLAN.md`): `logging_setup.py` test coverage
+      added — `tests/test_logging.py`, 100% line coverage.
+- [ ] CI lints and formats only `services/` (`ruff check .` runs there),
+      so `tests/` and `tools/` are not covered by `ruff`/`mypy`. Decide
+      whether to extend the CI job to them.
 
 ## Documentation
 

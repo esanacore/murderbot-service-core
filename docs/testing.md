@@ -21,7 +21,7 @@ software-only.
 
 | Phase | Test | Pass criteria | Evidence to record |
 |---|---|---|---|
-| 1 | POST/BIOS visibility across RTX 4080 outputs + local-display combinations | BIOS visible remotely for the chosen output combination | Photo/recording, output combination used |
+| 1 | POST/BIOS visibility across host PC video outputs + local-display combinations | BIOS visible remotely for the chosen output combination | Photo/recording, output combination used |
 | 1 | Keyboard/mouse emulation, virtual media, reboot recovery, network reconnect | All functions work; PiKVM reconnects after host reboot without manual intervention | Test log |
 | 1 | Extended stability test | No PiKVM crash/undervoltage/thermal warning over test duration (duration `TBD`) | `vcgencmd get_throttled` output, uptime log |
 | 2 | Current draw at idle, capture load, peak startup | Values recorded, feed `docs/power-design.md` | Instrument + method noted |

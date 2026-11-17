@@ -19,7 +19,7 @@ work; this file is milestone-based delivery planning.
 
 ## Milestone 1: PiKVM Core Proof (FR-01, FR-02)
 
-- [ ] Validate BIOS/POST visibility across RTX 4080 outputs.
+- [ ] Validate BIOS/POST visibility across host PC video outputs.
 - [ ] Verify HID emulation, virtual media, reboot recovery.
 - [ ] Extended stability + undervoltage/thermal check.
 

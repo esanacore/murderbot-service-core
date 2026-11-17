@@ -62,3 +62,18 @@ jobs:
           args: --no-progress --exclude-mail --exclude-path constitution "**/*.md"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  secrets-scan:
+    name: Secrets scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      # Formal secrets scan beyond .pre-commit's detect-private-key hook
+      # (docs/backlog.md P2, docs/security.md known gap). Uses the
+      # constitution's checker, which covers credential-shaped filenames,
+      # high-confidence content patterns, and .gitignore coverage.
+      - name: Run constitution secrets sweep
+        run: bash constitution/scripts/check_secrets.sh .

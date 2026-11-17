@@ -113,7 +113,7 @@ Raspberry Pi attached.
 
 ## Explicit Non-Goals
 
-- `WON'T` Native 4K capture/streaming of the RTX 4080 gaming output.
+- `WON'T` Native 4K capture/streaming of the host PC's gaming output.
 - `WON'T` Replacing motherboard fan control, PSU protection, or any
   safety-critical PC function.
 - `WON'T` A custom production PCB before the bench prototype and pin

@@ -34,10 +34,10 @@ out of sync with upstream.
 3. Boot on bench power (not yet installed in the host PC) and confirm
    local Ethernet access to the web UI.
 4. Connect the HDMI-to-CSI bridge and confirm capture from a test source
-   before connecting to the RTX 4080.
+   before connecting to the host PC.
 5. Confirm keyboard/mouse HID emulation and virtual media against the
    test source.
-6. Only after the above: connect to the RTX 4080 and verify POST/BIOS
+6. Only after the above: connect to the host PC and verify POST/BIOS
    visibility (`docs/testing.md` Phase 1 matrix).
 7. Apply the project's security baseline (`docs/security.md`) —
    credentials, VPN access, no raw port-forwarding — before leaving the

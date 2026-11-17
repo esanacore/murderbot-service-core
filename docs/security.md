@@ -56,5 +56,9 @@ See `SECURITY.md` for how to report a vulnerability.
 
 - LAN-boundary threat model for post-1.0 REST API / web dashboard is not
   yet written — track as a backlog item once Phase 5 nears completion.
-- Formal secrets-scanning in CI (beyond `detect-private-key` in
-  `.pre-commit-config.yaml`) is not yet configured.
+- Formal secrets-scanning in CI is now configured via the
+  `secrets-scan` job in `.github/workflows/ci.yml`, which runs
+  `constitution/scripts/check_secrets.sh` (credential-shaped filenames,
+  high-confidence content patterns, and `.gitignore` coverage). This
+  supplements, and does not replace, the `.pre-commit-config.yaml`
+  `detect-private-key` hook, which still runs on every commit.

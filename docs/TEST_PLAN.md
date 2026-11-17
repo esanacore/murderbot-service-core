@@ -39,6 +39,7 @@ untouched legacy code.
 | Date | Overall coverage | Notes |
 | --- | --- | --- |
 | 2026-07-11 | 96% (226 stmts, 10 missed, 35/35 tests passing) | Baseline. `logging_setup.py` is 0% covered (trivial `logging.basicConfig` wrapper, GAP-005 below); everything else implemented is 96-100%. |
+| 2026-11-16 | 99% (342 stmts, 4 missed, 81/81 tests passing) | Added `tests/test_logging.py` (34 tests) and `tests/test_core_service.py` (12 tests). `logging_setup.py` and `core_service.py` are both 100% covered. GAP-005 closed. Remaining misses are one-line defensive branches in `config.py`, `hardware/`, `rgb/`, and `state_machine.py`. |
 
 A downward trend is a signal to investigate, even when the number stays
 above the floor.
@@ -51,7 +52,7 @@ above the floor.
 | GAP-002 | Real audio/RGB backends | Medium | FR-06, FR-08 | Open | `TODO.md` Technical Debt |
 | GAP-003 | Runtime profile *selection* logic (vs. parsing) | Medium | FR-08 | Open | `TODO.md` Technical Debt |
 | GAP-004 | Cross-service fault-injection (bench-only, no unit-test equivalent) | High — this is the core safety property of the whole design | FR-05, NFR-02 | Open | `testing.md` "Fault-injection tests" |
-| GAP-005 | `logging_setup.py` untested (0% coverage) | Low | n/a | Open | `TODO.md` Testing |
+| GAP-005 | `logging_setup.py` untested (0% coverage) | Low | n/a | Closed 2026-11-16 | `TODO.md` Testing |
 
 ## Requirement Coverage
 

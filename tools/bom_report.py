@@ -66,13 +66,25 @@ def summarize(bom_path: Path) -> None:
 
     print("BOM target-cost summary (approximate - see hardware/bom.csv for exact rows)\n")
     print(f"{'Phase':<12}{'Low':>10}{'High':>10}")
-    for phase in sorted(by_phase_low, key=lambda p: (len(p), p)):
+    for phase in sorted(by_phase_low, key=_phase_sort_key):
         print(f"{phase:<12}${by_phase_low[phase]:>8.2f} ${by_phase_high[phase]:>8.2f}")
     print(f"\n{'TOTAL':<12}${total_low:>8.2f} ${total_high:>8.2f}")
 
     print("\nStatus counts:")
     for status, count in sorted(by_status.items()):
         print(f"  {status}: {count}")
+
+
+def _phase_sort_key(phase: str) -> tuple[float, ...]:
+    """Sort phase labels numerically: '0' < '0-1' < '1' < '2-4' < 'post-1.0'.
+
+    Sorting by string length put every range ('0-1', '1-4') after every
+    single phase, which reads wrong in a cost report. A label sorts by
+    its leading number, then by the end of its range; labels with no
+    whole-number part ('post-1.0', 'unknown') sort last.
+    """
+    numbers = [float(part) for part in phase.split("-") if part.isdigit()]
+    return tuple(numbers) if numbers else (float("inf"),)
 
 
 if __name__ == "__main__":

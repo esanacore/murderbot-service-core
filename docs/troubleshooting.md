@@ -27,7 +27,7 @@ Links to the relevant docs/backlog/ADR entries.
 | Symptom area | Check |
 |---|---|
 | PiKVM unreachable | `docs/pikvm-setup.md` bring-up checklist; confirm standby branch is actually powered (`docs/power-design.md`) |
-| No video in PiKVM | Confirm which RTX 4080 output carries POST/BIOS (§5.2 discussion in `docs/architecture.md` / original report); check capture bridge cabling |
+| No video in PiKVM | Confirm which host PC output carries POST/BIOS (§5.2 discussion in `docs/architecture.md` / original report); check capture bridge cabling |
 | ATX pulse not registering / stuck | `docs/testing.md` Phase 2 fault-injection tests; verify fail-open behavior, check optocoupler wiring against `docs/wiring.md` |
 | Undervoltage warnings | `vcgencmd get_throttled`; revisit `docs/power-design.md` standby-branch budget — likely an unmeasured or underestimated load |
 | Audio not playing / looping | Check `murderbot-audio.service` logs; verify cooldown logic in `services/src/murderbot_core/audio/`; confirm clip exists locally per `assets/README.md` (not committed) |

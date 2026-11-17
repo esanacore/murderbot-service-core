@@ -35,7 +35,7 @@ tools/skills rather than blocking on them.
 ## Project purpose (short form)
 
 Murderbot Service Core (MSC) is an internal Raspberry Pi 4–based management
-controller for a desktop PC (MSI Z490-A PRO, RTX 4080). It combines DIY
+controller for a desktop PC (MSI Z490-A PRO; GTX 1060 6 GB). It combines DIY
 PiKVM, optoisolated ATX power/reset control, startup audio, addressable
 RGB, and optional host telemetry, and — over time — grows toward
 iDRAC/iLO-style enterprise management features (REST API, web dashboard,
@@ -97,7 +97,7 @@ A change is done when:
 
 ## Non-goals reminder (first release, i.e. through end of Phase 4/5)
 
-- Capturing/streaming the RTX 4080 gaming output at native 4K.
+- Capturing/streaming the host PC's gaming output at native 4K.
 - Replacing motherboard fan control, PSU protection, or any safety-critical
   PC function.
 - Exposing PiKVM directly to the public internet without VPN or equivalent.
