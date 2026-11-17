@@ -6,7 +6,7 @@ under `wiki/` in this repository and reviewed through normal pull requests.
 ## What this project does
 
 An embedded, Raspberry Pi–based service processor that lives inside the
-"Murderbot" desktop PC (MSI Z490-A PRO / i7-10700 / RTX 4080) and provides
+"Murderbot" desktop PC (MSI Z490-A PRO / i7-10700; GPU model TBD) and provides
 enterprise-style out-of-band management in the spirit of Dell iDRAC / HP iLO
 / Lenovo XClarity — plus custom personality features: startup audio,
 addressable RGB, and eventually host telemetry, a plugin architecture, and a

@@ -19,12 +19,15 @@ is canonical for hardware-phase sequencing; update both in the same change.
 
 ## Technical Debt
 
-- [ ] `services/systemd/*.service` reference entrypoint modules
+- [x] `services/systemd/*.service` reference entrypoint modules
       (`murderbot_core.core_service`, `.audio_service`, `.rgb_service`,
-      `.telemetry_service`, `.health_check`) that don't exist yet — only the
-      library layer is implemented. See `docs/software.md`.
-- [ ] `logging_setup.py` doesn't yet read `configs/examples/logging.example.yaml`'s
-      schema — see `docs/backlog.md` P3 item.
+      `.telemetry_service`, `.health_check`). `core_service` is now
+      implemented (config load + bus + state machine + transition
+      logging); the audio/RGB/telemetry/health entrypoints remain stubs
+      pending their phases. See `docs/software.md`.
+- [x] `logging_setup.py` reads `configs/examples/logging.example.yaml`'s
+      schema (`level`, `destinations`) and is covered by
+      `tests/test_logging.py`. See `docs/backlog.md` P3 item.
 
 ## Refactoring
 
@@ -36,8 +39,8 @@ is canonical for hardware-phase sequencing; update both in the same change.
 - [ ] Bench/integration/fault-injection test matrix in `docs/testing.md` is
       entirely unexecuted (pre-hardware-bring-up). Each row needs evidence
       recorded once Phase 1+ starts.
-- [ ] GAP-005 (`docs/TEST_PLAN.md`): `logging_setup.py` has 0% test
-      coverage — add a test once it does more than wrap `logging.basicConfig`.
+- [x] GAP-005 (`docs/TEST_PLAN.md`): `logging_setup.py` test coverage
+      added — 17 tests in `tests/test_logging.py`, 99% line coverage.
 
 ## Documentation
 

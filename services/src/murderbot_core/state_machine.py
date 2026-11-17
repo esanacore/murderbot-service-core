@@ -95,6 +95,20 @@ class HostStateMachine:
     def state(self) -> HostState:
         return self._state
 
+    @property
+    def consumed_event_types(self) -> frozenset[EventType]:
+        """Every event type this machine reacts to.
+
+        Derived from the transition table plus the FAULT-recovery guard
+        (which handles ``FAULT_CLEARED`` outside the table), so it stays
+        in sync with the machine's actual behavior if EventType or the
+        table changes — callers (e.g. the core service wiring) should
+        iterate this rather than re-typing the event list.
+        """
+        types = {event_type for (_, event_type) in _TRANSITIONS}
+        types.add(EventType.FAULT_CLEARED)
+        return frozenset(types)
+
     def handle(self, event: Event) -> HostState:
         """Process one event, applying at most one transition.
 

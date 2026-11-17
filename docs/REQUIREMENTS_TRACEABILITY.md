@@ -18,7 +18,7 @@ or verifies a requirement.
 ## Functional Requirements
 
 | Requirement ID | Level | Description | Verifying Tests | Status |
-| --- | --- | --- | --- | --- |
+| | --- | --- | --- | --- |
 | FR-01 | MUST | Reachable while PC off, PSU connected | `testing.md` Phase 1 stability test | Not Started |
 | FR-02 | MUST | Remote BIOS-level keyboard/mouse/video | `testing.md` Phase 1 POST/BIOS test | Not Started |
 | FR-03 | MUST | Isolated remote power/reset | `testing.md` Phase 2 pulse-timing test | Not Started |
@@ -33,9 +33,9 @@ or verifies a requirement.
 ## Non-Functional Requirements
 
 | Requirement ID | Level | Description | Verifying Tests | Status |
-| --- | --- | --- | --- | --- |
+| | --- | --- | --- | --- |
 | NFR-01 | MUST | No public PiKVM exposure; no committed secrets | `../.gitignore` secret patterns + `../.pre-commit-config.yaml`'s `detect-private-key` hook (partial — no CI secret-scan yet, see `backlog.md`) | In Progress |
-| NFR-02 | MUST | Fail-open ATX on any service crash | `tests/test_state_machine.py::test_fault_detected_from_any_non_fault_state`, `::test_fault_cleared_returns_to_standby_only_if_main_rail_confirmed_off` (state-machine logic only; real GPIO fail-open behavior is `testing.md` Phase 2 fault-injection) | In Progress |
+| NFR-02 | MUST | Fail-open ATX on any service crash | `tests/test_state_machine.py::test_fault_detected_from_any_non_fault_state`, `::test_fault_cleared_returns_to_standby_only_if_main_rail_confirmed_off` (state-machine logic only); `tests/test_core_service.py::test_core_does_not_drive_any_hardware` (the core process binds no hardware/audio/rgb backend and produces no hardware side effects during `build_core`/`main`, so a restart of `murderbot-core` cannot assert a pulse — real GPIO fail-open behavior remains `testing.md` Phase 2 fault-injection) | In Progress |
 | NFR-03 | MUST | Hardware code behind Protocol + mock | `tests/test_hardware_interfaces.py` (all rows) | Verified |
 
 ## Coverage Summary

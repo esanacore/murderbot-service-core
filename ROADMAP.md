@@ -24,7 +24,7 @@ image flashed and reachable on the bench network.
 ## Phase 1 — PiKVM core proof
 
 - Validate BIOS/POST visibility, HID emulation, virtual media, and
-  reconnect behavior against the RTX 4080's video outputs.
+  reconnect behavior against the host PC's video outputs.
 - Extended stability + undervoltage/thermal check.
 
 ## Phase 2 — Standby power and ATX integration
@@ -89,6 +89,6 @@ the API; OTA needs a release/versioning story already defined in
 
 - Public-internet exposure of PiKVM without VPN or equivalent, at any
   phase.
-- Native 4K capture/streaming of the RTX 4080's gaming output.
+- Native 4K capture/streaming of the host PC's gaming output.
 - A custom production PCB before Phase 5's pin allocation is proven on
   perfboard/bench wiring.

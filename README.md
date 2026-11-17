@@ -5,7 +5,7 @@
 <!-- CONSTITUTION_END -->
 
 An embedded, Raspberry Pi–based service processor that lives inside a desktop
-PC ("Murderbot": MSI Z490-A PRO / Intel Core i7-10700 / RTX 4080) and provides
+PC ("Murderbot": MSI Z490-A PRO / Intel Core i7-10700; GPU model TBD) and provides
 enterprise-style out-of-band management — in the spirit of Dell iDRAC, HP
 iLO, or Lenovo XClarity — plus custom "personality" features: startup audio,
 addressable RGB, and (eventually) host telemetry, a plugin architecture, and
@@ -85,7 +85,7 @@ flowchart TB
         ATX["ATX interface\n(isolated, fail-open)"]
     end
 
-    GPU["RTX 4080 video out"] --> PIKVM
+    GPU["Host PC video out"] --> PIKVM
     CORE -->|events| ACC
     ATX -->|"isolated pulses"| HEADERS["Motherboard PWR/RESET"]
 

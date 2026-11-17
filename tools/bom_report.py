@@ -66,13 +66,24 @@ def summarize(bom_path: Path) -> None:
 
     print("BOM target-cost summary (approximate - see hardware/bom.csv for exact rows)\n")
     print(f"{'Phase':<12}{'Low':>10}{'High':>10}")
-    for phase in sorted(by_phase_low, key=lambda p: (len(p), p)):
+    for phase in sorted(by_phase_low, key=_phase_sort_key):
         print(f"{phase:<12}${by_phase_low[phase]:>8.2f} ${by_phase_high[phase]:>8.2f}")
     print(f"\n{'TOTAL':<12}${total_low:>8.2f} ${total_high:>8.2f}")
 
     print("\nStatus counts:")
     for status, count in sorted(by_status.items()):
         print(f"  {status}: {count}")
+
+
+def _phase_sort_key(phase: str) -> tuple[int, ...]:
+    """Sort phase labels numerically: '0' < '1' < '2-4' < 'post-1.0'.
+
+    String sorting puts '0-1' before '1', which reads wrong in a cost
+    report. Split on '-' and '-'-joined ranges sort by their leading
+    number, with ties broken by the full string.
+    """
+    numbers = [int(part) for part in phase.split("-") if part.isdigit()]
+    return tuple(numbers) if numbers else (float("inf"),)
 
 
 if __name__ == "__main__":

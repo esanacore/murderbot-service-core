@@ -49,7 +49,7 @@ flowchart TB
     HOSTON --> AMP["I2S amplifier + speaker"]
     HOSTON --> LEDS["NeoPixel strip(s)"]
 
-    GPU["RTX 4080 video out"] --> CAPTURE --> PIKVM
+    GPU["Host PC video out"] --> CAPTURE --> PIKVM
     PI -->|"USB OTG/HID"| HOSTUSB["Murderbot USB"]
     ATX -->|"isolated, default-open"| HEADERS["Motherboard PWR/RESET headers"]
 

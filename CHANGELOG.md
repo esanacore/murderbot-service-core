@@ -10,6 +10,26 @@ a `v0.1.0` tag is cut — see `docs/versioning-and-releases.md`.
 
 ### Added
 
+- `services/src/murderbot_core/core_service.py`: the entrypoint module
+  referenced by `services/systemd/murderbot-core.service`. Loads
+  `hardware.yaml`/`profiles.yaml`/`logging.yaml`, builds the event bus
+  and state machine, and wires a transition logger plus the
+  observation->state-machine feed. Performs no hardware I/O, so the
+  safety invariant (a restart must never assert a pulse, play audio, or
+  illuminate LEDs) holds by construction. Covered by
+  `tests/test_core_service.py`, which also asserts the module imports
+  no hardware/audio/rgb backend.
+- `services/src/murderbot_core/logging_setup.py` now reads
+  `configs/examples/logging.example.yaml`'s schema (`level`,
+  `destinations`) via `load_logging_config()`, instead of taking only a
+  hardcoded numeric level. `configure_logging()` accepts a parsed
+  `LoggingConfig`, an explicit `level`, or a config `path`, degrades
+  gracefully on a bad logging config, and is idempotent on reconfigure.
+  Covered by `tests/test_logging.py` (17 tests).
+- `secrets-scan` job in `.github/workflows/ci.yml`, running
+  `constitution/scripts/check_secrets.sh` on every push and PR. This
+  closes the P2 backlog item for formal secrets-scanning beyond
+  pre-commit's `detect-private-key` hook (`docs/security.md`).
 - `CLAUDE.md` and `.goosehints` now carry real, verified install
   instructions for gstack (`garrytan/gstack`) and goose/goosetown
   (`aaif-goose` org) instead of only naming the tools, matching the fix
@@ -37,6 +57,27 @@ a `v0.1.0` tag is cut — see `docs/versioning-and-releases.md`.
   CI gates for constitution version/compliance/tests/doc-freshness).
 
 ### Changed
+
+- Removed all references to the RTX 4080 GPU across `README.md`,
+  `AGENTS.md`, `ROADMAP.md`, `docs/requirements.md`,
+  `docs/PRODUCT_REQUIREMENTS.md`, `docs/backlog.md`, `docs/testing.md`,
+  `docs/pikvm-setup.md`, `docs/wiring.md`, `docs/troubleshooting.md`,
+  `docs/MVP_BACKLOG.md`, `docs/architecture.md`, and `wiki/Home.md`.
+  The GPU has been moved back to the user's gaming PC and out of
+  Murderbot; the host PC's GPU model is now recorded as `TBD` in those
+  files rather than asserted as a specific part. The corresponding P0
+  backlog item ("Test RTX 4080 POST output behavior across
+  HDMI/DisplayPort") was reworded to be GPU-agnostic.
+- `services/src/murderbot_core/core_service.py`'s bus wiring no longer
+  registers the transition logger and the state-machine feed as
+  separate subscribers for the same six event types (each event was
+  handled twice). They are now a single handler per event type, and the
+  event set is derived from `HostStateMachine.consumed_event_types`
+  rather than re-typed, so it stays in sync with the transition table.
+- `services/src/murderbot_core/logging_setup.py`'s `configure_logging`
+  installs only handlers tagged `_MurderbotHandler`, so idempotent
+  reconfiguration removes its own handlers without stripping test
+  frameworks' or application handlers from the root logger.
 
 ### Fixed
 

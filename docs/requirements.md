@@ -36,7 +36,7 @@ can slip a point release with an explicit ADR/backlog note explaining why.
 
 ### Non-goals for the first release (through v1.0, `ROADMAP.md` Phase 5)
 
-- Capturing or streaming the RTX 4080 gaming output at native 4K
+- Capturing or streaming the host PC's gaming output at native 4K
   resolution.
 - Replacing motherboard fan control, PSU protection, or any
   safety-critical PC function.

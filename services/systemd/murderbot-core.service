@@ -6,9 +6,11 @@ After=network.target
 [Service]
 Type=simple
 User=murderbot
-# ExecStart's target module (murderbot_core.core_service) does not exist
-# yet - only the library (state machine/events/config) is implemented so
-# far. This unit is an example for Phase 2+ wiring, not yet installable.
+# Entrypoint module (murderbot_core.core_service) is implemented and
+# unit-tested; this unit is still an example, not installed/enabled
+# automatically (AGENTS.md rule 5: safe defaults; phased scope per rule
+# 9). Hardware-driving wiring (ATX/audio/RGB) is a separate concern that
+# subscribes to the same bus in later phases — see docs/software.md.
 ExecStart=/opt/murderbot/services/.venv/bin/python -m murderbot_core.core_service
 Restart=on-failure
 RestartSec=2

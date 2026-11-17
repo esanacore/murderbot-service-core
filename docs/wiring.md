@@ -14,7 +14,7 @@ meter, and the confirming source is cited inline.
 | ATX front-panel header (motherboard) | PWR SW / RESET SW / power LED / HDD LED | `TBD` | MSI Z490-A PRO manual (front panel header section) | Not yet verified against board silkscreen + meter |
 | ATX 24-pin main power | 5VSB identification | 24 | MSI Z490-A PRO manual / ATX spec | 5VSB pin location known from ATX spec convention; PSU-specific rating still `TBD` (see `docs/power-design.md`) |
 | Raspberry Pi 40-pin GPIO | ATX opto outputs, NeoPixel data, I²S, sensing | 40 | Raspberry Pi 4 datasheet | Pin *assignment* (which of the 40 pins is used for what) is a project decision, not yet made — track in `docs/decisions/` when frozen |
-| HDMI-to-CSI bridge | Video capture from RTX 4080 | per bridge datasheet | Bridge manufacturer datasheet (bridge model not yet selected — see `hardware/bom.csv`) | Blocked on bridge selection |
+| HDMI-to-CSI bridge | Video capture from host PC | per bridge datasheet | Bridge manufacturer datasheet (bridge model not yet selected — see `hardware/bom.csv`) | Blocked on bridge selection |
 | I²S amplifier breakout (MAX98357A-class) | Audio out | per breakout datasheet | Adafruit MAX98357A product page | Not yet wired |
 | NeoPixel strip connector | RGB data/power/ground | 3 (5V, GND, DIN) | WS2812B datasheet | Not yet wired |
 

@@ -10,10 +10,11 @@ services/
     ├── state_machine.py # STANDBY/HOST_STARTING/HOST_RUNNING/HOST_SHUTTING_DOWN/FAULT
     ├── config.py         # YAML config loading/validation (configs/examples/)
     ├── logging_setup.py  # Structured logging setup shared by all services
+    ├── core_service.py   # Entrypoint for murderbot-core.service (config load + bus + state machine + transition logging)
     ├── hardware/          # ATX/GPIO Protocol interfaces + mock implementation
     ├── audio/             # Audio-service Protocol interface + mock implementation
-    ├── rgb/                # RGB-service Protocol interface + mock implementation
-    └── telemetry/          # Telemetry Protocol interface + mock implementation
+    ├── rgb/               # RGB-service Protocol interface + mock implementation
+    └── telemetry/         # Telemetry Protocol interface + mock implementation
 ```
 
 ## Services (systemd units, `services/systemd/`)
@@ -71,8 +72,17 @@ telemetry is absent.
 | Event types, state enum, transitions | Implemented, unit-tested |
 | Config parsing | Implemented (schema for `hardware.yaml`/`profiles.yaml`/`logging.yaml`) |
 | GPIO/audio/RGB/telemetry interfaces + mocks | Implemented as `Protocol`s with mock backends |
+| `core_service` entrypoint (config load + bus + state machine + transition logging) | Implemented, unit-tested (`tests/test_core_service.py`); performs no hardware I/O |
 | Real GPIO/audio/RGB/telemetry backends | Not implemented — blocked on hardware bring-up (`ROADMAP.md` Phases 2–4) |
 | REST API, web dashboard, plugin loader, OTA | Not implemented — post-1.0 (`ROADMAP.md`) |
+
+**Note for this phase:** `hardware.yaml`'s `atx_enabled` / `audio_enabled` /
+`rgb_enabled` / `telemetry_enabled` flags are parsed and validated, but no
+code path consumes them yet — the core service has no hardware wiring to
+gate. That is correct for Phase 0 (no backends exist), but it means the
+"safe defaults" guard in `config.py` is not yet *enforced* anywhere; a
+future phase must read these flags before enabling the corresponding
+backend, and should be reviewed as part of that phase's ADR.
 
 ## Testing
 
