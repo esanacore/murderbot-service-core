@@ -304,3 +304,36 @@ def test_configure_logging_failure_keeps_existing_handlers(tmp_path: Path) -> No
     finally:
         for handler in _murderbot_handlers(root):
             root.removeHandler(handler)
+
+
+@pytest.mark.parametrize("root", ["[]", "false", "0", '""'])
+def test_load_logging_config_rejects_falsy_non_mapping_root(tmp_path: Path, root: str) -> None:
+    # A falsy root is still not a mapping; only an empty document means
+    # "use the defaults".
+    path = tmp_path / "logging.yaml"
+    path.write_text(root + "\n", encoding="utf-8")
+    with pytest.raises(LoggingConfigError, match="mapping"):
+        load_logging_config(path)
+
+
+def test_load_logging_config_empty_document_uses_defaults(tmp_path: Path) -> None:
+    path = tmp_path / "logging.yaml"
+    path.write_text("", encoding="utf-8")
+    assert load_logging_config(path) == LoggingConfig()
+
+
+def test_load_logging_config_rejects_invalid_utf8(tmp_path: Path) -> None:
+    path = tmp_path / "logging.yaml"
+    path.write_bytes(b"level: INFO\n# \xff\xfe\n")
+    with pytest.raises(LoggingConfigError, match="could not be read"):
+        load_logging_config(path)
+
+
+def test_configure_logging_rejects_empty_destinations_and_keeps_handlers() -> None:
+    configure_logging()
+    root = logging.getLogger()
+    before = _murderbot_handlers(root)
+    assert before
+    with pytest.raises(LoggingConfigError, match="non-empty"):
+        configure_logging(LoggingConfig(destinations=[]))
+    assert _murderbot_handlers(root) == before

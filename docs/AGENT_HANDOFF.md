@@ -36,7 +36,7 @@ Newest entry first. Copy the template below for a new entry.
   P0 hardware backlog items (`docs/backlog.md`) all need the bench.
 - **Verification Run** (Python 3.14 venv at `services/.venv`; CI uses
   3.11): `cd services && pytest --cov=murderbot_core
-  --cov-report=term-missing` — 74 passed, 99% (338 stmts, 4 missed);
+  --cov-report=term-missing` — 81 passed, 99% (342 stmts, 4 missed);
   `ruff check .`, `ruff format --check .`, `mypy src` clean;
   `constitution/scripts/check_compliance.sh`, `check_traceability.sh`
   (13/13), `check_secrets.sh`, `check_next_steps.sh`,

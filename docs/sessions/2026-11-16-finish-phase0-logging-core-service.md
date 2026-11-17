@@ -94,7 +94,7 @@ and leave merging to the maintainer.
 Pull request #33 from `wip/phase0-logging-core-service`: the original
 WIP commit plus follow-up commits for the logging fixes, the core-service
 fallback and isolation tests, the traceability/BOM-tool repairs, and the
-documentation. Locally: 74 tests pass with 99% coverage (338 statements,
+documentation. Locally: 81 tests pass with 99% coverage (342 statements,
 4 missed), `ruff check`, `ruff format --check`, and `mypy src` are clean,
 and the constitution checkers CI runs all pass. Deliberately left out: a
 transport event loop for `core_service`, the audio/RGB/telemetry/health

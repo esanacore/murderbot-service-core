@@ -55,9 +55,13 @@ def _read_yaml(path: Path) -> dict[str, object]:
     # logging config (core_service.build_core) have one exception to catch.
     try:
         with path.open("r", encoding="utf-8") as fh:
-            data = yaml.safe_load(fh) or {}
-    except (OSError, yaml.YAMLError) as exc:
+            data = yaml.safe_load(fh)
+    except (OSError, UnicodeError, yaml.YAMLError) as exc:
         raise LoggingConfigError(f"logging config {path} could not be read: {exc}") from exc
+    # Only an empty document means "use the defaults". A falsy non-mapping
+    # root ([], false, 0) is still a malformed config and is rejected below.
+    if data is None:
+        return {}
     if not isinstance(data, dict):
         raise LoggingConfigError(
             f"logging config {path} must contain a YAML mapping at the top level"
@@ -154,6 +158,8 @@ def configure_logging(
     # Re-validated here because LoggingConfig can be constructed directly
     # and ``level=`` never passes through load_logging_config().
     level_name = _validated_level_name(config.level)
+    if not config.destinations:
+        raise LoggingConfigError("'destinations' must be a non-empty list of strings, got []")
     streams = [_destination_stream(dest) for dest in config.destinations]
     # logging.basicConfig accepts a single stream/handler; route through
     # a multi-stream handler so 'stdout' + 'stderr' both land in journald
