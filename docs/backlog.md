@@ -23,11 +23,11 @@ added later, this table should link to it rather than duplicate it.
 | Priority | Task | Notes |
 |---|---|---|
 | P1 | Wire up `.github/workflows/ci.yml` against a real `services/` package (done — verify it stays green as code lands) | See `.github/workflows/ci.yml` |
-| P2 | Implement `murderbot_core.core_service` entrypoint so `services/systemd/murderbot-core.service` is installable | Done — config load + event bus + state machine + transition logging; 6 tests, `tests/test_core_service.py`. Audio/RGB/telemetry/health entrypoints still pending their phases. |
+| P2 | Implement `murderbot_core.core_service` entrypoint so `services/systemd/murderbot-core.service` is installable | Done — config load + event bus + state machine + transition logging, covered by `tests/test_core_service.py`. The process has no transport event loop yet (sets up, logs, exits 0), so the unit is still an example, not something to enable. Audio/RGB/telemetry/health entrypoints still pending their phases. |
 | P2 | Decide on docs-site generation (mkdocs vs. plain GitHub rendering) | Currently plain markdown; revisit once `docs/` grows large enough to need navigation/search |
 | P2 | Formal secrets-scanning in CI beyond pre-commit's `detect-private-key` | Done — `secrets-scan` job in `.github/workflows/ci.yml` runs `constitution/scripts/check_secrets.sh` on every PR and push |
 | P3 | LAN-boundary threat model for post-1.0 REST API/dashboard | `docs/security.md` known gap; only relevant once `ROADMAP.md` post-1.0 items start |
-| P3 | Wire `logging_setup.py` to read `configs/examples/logging.example.yaml`'s schema instead of a hardcoded level argument | Done — `load_logging_config` + `configure_logging(path=...)`, 17 tests, `tests/test_logging.py` |
+| P3 | Wire `logging_setup.py` to read `configs/examples/logging.example.yaml`'s schema instead of a hardcoded level argument | Done — `load_logging_config` + `configure_logging(path=...)`, covered by `tests/test_logging.py` |
 
 ## How to use this file
 

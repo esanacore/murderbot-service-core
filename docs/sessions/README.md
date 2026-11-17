@@ -32,3 +32,4 @@ Newest first.
 
 | Date | Session | Topics |
 | --- | --- | --- |
+| 2026-11-16 | [Finish the Phase 0 logging-config and core_service work](2026-11-16-finish-phase0-logging-core-service.md) | logging_setup.py, load_logging_config, configure_logging, LoggingConfigError, logging.example.yaml, core_service.py, murderbot-core.service, systemd entrypoint, consumed_event_types, hardware isolation test, secrets-scan CI job, check_traceability.sh, REQUIREMENTS_TRACEABILITY.md, tests/conftest.py, bom_report.py, GAP-005 |

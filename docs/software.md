@@ -72,7 +72,8 @@ telemetry is absent.
 | Event types, state enum, transitions | Implemented, unit-tested |
 | Config parsing | Implemented (schema for `hardware.yaml`/`profiles.yaml`/`logging.yaml`) |
 | GPIO/audio/RGB/telemetry interfaces + mocks | Implemented as `Protocol`s with mock backends |
-| `core_service` entrypoint (config load + bus + state machine + transition logging) | Implemented, unit-tested (`tests/test_core_service.py`); performs no hardware I/O |
+| `core_service` entrypoint (config load + bus + state machine + transition logging) | Implemented, unit-tested (`tests/test_core_service.py`); performs no hardware I/O. No transport event loop yet — see the note below |
+| Logging config (`logging.yaml`: `level`, `destinations`) | Implemented, unit-tested (`tests/test_logging.py`); `stdout`/`stderr` destinations only |
 | Real GPIO/audio/RGB/telemetry backends | Not implemented — blocked on hardware bring-up (`ROADMAP.md` Phases 2–4) |
 | REST API, web dashboard, plugin loader, OTA | Not implemented — post-1.0 (`ROADMAP.md`) |
 
@@ -83,6 +84,17 @@ gate. That is correct for Phase 0 (no backends exist), but it means the
 "safe defaults" guard in `config.py` is not yet *enforced* anywhere; a
 future phase must read these flags before enabling the corresponding
 backend, and should be reviewed as part of that phase's ADR.
+
+**`core_service` does not stay running yet.** `python -m
+murderbot_core.core_service [config-dir]` reads `hardware.yaml`,
+`profiles.yaml`, and `logging.yaml` from `config-dir` (default
+`/etc/murderbot`), builds the bus and state machine, logs the starting
+state, and exits 0 — nothing publishes events to the bus until a real
+transport (PiKVM GPIO daemon, host-agent socket) exists in Phase 2+. A
+missing or invalid `hardware.yaml`/`profiles.yaml` is a startup error; a
+missing or invalid `logging.yaml` only produces a warning and the default
+logging setup (INFO, stdout). `services/systemd/murderbot-core.service`
+therefore remains an example unit, not one to enable on a device.
 
 ## Testing
 

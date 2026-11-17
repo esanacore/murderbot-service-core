@@ -29,14 +29,16 @@ src/murderbot_core/
 ├── events.py        # Event dataclasses/enum + in-process event bus
 ├── state_machine.py # STANDBY/HOST_STARTING/HOST_RUNNING/HOST_SHUTTING_DOWN/FAULT
 ├── config.py         # YAML config loading/validation
-├── logging_setup.py  # Shared structured logging setup
+├── logging_setup.py  # Shared structured logging setup (reads logging.yaml)
+├── core_service.py   # murderbot-core.service entrypoint (no hardware I/O)
 ├── hardware/          # ATX/GPIO Protocol + MockAtxInterface
 ├── audio/             # Audio-service Protocol + MockAudioPlayer
 ├── rgb/                # RGB-service Protocol + MockRgbController
 └── telemetry/          # Telemetry Protocol + MockTelemetrySource
 ```
 
-Only the state machine, events, and config layers have real logic today.
+Only the state machine, events, config, logging-setup, and core-service
+entrypoint layers have real logic today.
 The `hardware/`, `audio/`, `rgb/`, and `telemetry/` packages currently
 contain interface definitions and mock/no-op implementations only — real
 backends land in later roadmap phases once hardware exists to test
