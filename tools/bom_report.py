@@ -75,14 +75,15 @@ def summarize(bom_path: Path) -> None:
         print(f"  {status}: {count}")
 
 
-def _phase_sort_key(phase: str) -> tuple[int, ...]:
-    """Sort phase labels numerically: '0' < '1' < '2-4' < 'post-1.0'.
+def _phase_sort_key(phase: str) -> tuple[float, ...]:
+    """Sort phase labels numerically: '0' < '0-1' < '1' < '2-4' < 'post-1.0'.
 
-    String sorting puts '0-1' before '1', which reads wrong in a cost
-    report. Split on '-' and '-'-joined ranges sort by their leading
-    number, with ties broken by the full string.
+    Sorting by string length put every range ('0-1', '1-4') after every
+    single phase, which reads wrong in a cost report. A label sorts by
+    its leading number, then by the end of its range; labels with no
+    whole-number part ('post-1.0', 'unknown') sort last.
     """
-    numbers = [int(part) for part in phase.split("-") if part.isdigit()]
+    numbers = [float(part) for part in phase.split("-") if part.isdigit()]
     return tuple(numbers) if numbers else (float("inf"),)
 
 
