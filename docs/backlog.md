@@ -8,7 +8,7 @@ added later, this table should link to it rather than duplicate it.
 |---|---|---|
 | P0 | Identify exact PSU model and documented 5VSB rating | Photo/manual citation and recorded rating in `docs/power-design.md` |
 | P0 | Acquire or select Raspberry Pi 4 and compatible capture bridge | `hardware/bom.csv` rows marked selected with source |
-| P0 | Identify host PC GPU model and its POST output behavior across HDMI/DisplayPort | Test matrix results + photos, `docs/testing.md` |
+| P0 | Test host PC GPU (GTX 1060 6 GB) POST output behavior across HDMI/DisplayPort; repeat if the Quadro P2000 is added | Test matrix results + photos, `docs/testing.md` |
 | P0 | Choose safe PiKVM power/data cable topology | Diagram reviewed against official DIY guide, `docs/pikvm-setup.md` |
 | P1 | Measure Pi/capture idle and peak current | Logged measurements + instrument details, `docs/power-design.md` |
 | P1 | Prototype optoisolated PWR/RESET circuit | Schematic, bench test, default-open fault test, `docs/testing.md` |

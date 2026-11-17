@@ -59,11 +59,10 @@ Newest entry first. Copy the template below for a new entry.
 **Human action required:** steps 1, 3, 4, and 5.
 
 1. [ ] **HUMAN** — Review and merge pull request #33
-   - **Why a human:** merging is the maintainer's decision, and the
-     branch carries three changes the session plan did not list (the
-     GPU-model wording across the docs, the `secrets-scan` CI job, and
-     the `tools/bom_report.py` phase ordering) that need an owner's
-     yes or no.
+   - **Why a human:** merging is the maintainer's decision. The three
+     changes the session plan did not list (the GPU wording, the
+     `secrets-scan` CI job, and the `tools/bom_report.py` phase
+     ordering) were confirmed by the owner on 2026-11-16.
    - **You need:** review access to the repository.
    - **Procedure:**
      1. Read the "Outside the session plan" section of the pull request
@@ -75,19 +74,20 @@ Newest entry first. Copy the template below for a new entry.
 2. [ ] **AUTOMATED** — CI (`CI`, `Constitution *` workflows) runs on the
       merge commit, including the new `Secrets scan` job; watch for a red
       run. _(blocked by step 1)_
-3. [ ] **HUMAN** — Identify the host PC's GPU model and its POST/BIOS
-      output behavior across HDMI/DisplayPort
-   - **Why a human:** needs physical access to the desktop PC; the GPU
-     model is recorded as `TBD`.
+3. [ ] **HUMAN** — Record the host PC GPU's POST/BIOS output behavior
+      across HDMI/DisplayPort
+   - **Why a human:** needs physical access to the desktop PC. The GPU
+     is a GTX 1060 6 GB; a Quadro P2000 may be added, and the test must
+     be repeated if it is.
    - **You need:** the host PC powered on, its GPU outputs, and a capture
      bridge connected to the bench Pi.
    - **Procedure:**
      1. Power the host and enter firmware setup.
      2. Note which physical output (HDMI/DisplayPort) carries POST/BIOS.
-     3. Record the GPU model and output combination in
+     3. Record the output combination for the GTX 1060 in
         `docs/testing.md` Phase 1 matrix and `docs/backlog.md`.
    - **Done when:** the P0 backlog row for GPU POST behavior has a
-     recorded model, output combination, and evidence photo.
+     recorded output combination and evidence photo.
 4. [ ] **HUMAN** — Acquire/select the Raspberry Pi 4 and compatible
       HDMI-to-CSI capture bridge, and record them in `hardware/bom.csv`
    - **Why a human:** needs a purchase and physical parts on the bench.

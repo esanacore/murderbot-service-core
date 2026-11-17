@@ -75,11 +75,13 @@ a `v0.1.0` tag is cut — see `docs/versioning-and-releases.md`.
   `docs/PRODUCT_REQUIREMENTS.md`, `docs/backlog.md`, `docs/testing.md`,
   `docs/pikvm-setup.md`, `docs/wiring.md`, `docs/troubleshooting.md`,
   `docs/MVP_BACKLOG.md`, `docs/architecture.md`, and `wiki/Home.md`.
-  The GPU has been moved back to the user's gaming PC and out of
-  Murderbot; the host PC's GPU model is now recorded as `TBD` in those
-  files rather than asserted as a specific part. The corresponding P0
-  backlog item ("Test RTX 4080 POST output behavior across
-  HDMI/DisplayPort") was reworded to be GPU-agnostic.
+  The RTX 4080 has been moved back to the user's gaming PC and out of
+  Murderbot. The host PC's GPU is a GTX 1060 6 GB, named in `README.md`,
+  `AGENTS.md`, and `wiki/Home.md`; the other files refer to the host
+  PC's video output generically. A Quadro P2000 may be added later. The
+  corresponding P0 backlog item ("Test RTX 4080 POST output behavior
+  across HDMI/DisplayPort") now names the GTX 1060 and asks for a repeat
+  if the Quadro P2000 is installed.
 - `tools/bom_report.py` lists phases in numeric order (`0`, `0-1`, `1`,
   `1-4`, `2`, ...) instead of every single phase before every range.
 
