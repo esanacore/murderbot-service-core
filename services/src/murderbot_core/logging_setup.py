@@ -50,8 +50,14 @@ class LoggingConfig:
 def _read_yaml(path: Path) -> dict[str, object]:
     if not path.exists():
         raise LoggingConfigError(f"logging config file not found: {path}")
-    with path.open("r", encoding="utf-8") as fh:
-        data = yaml.safe_load(fh) or {}
+    # Unreadable files and YAML syntax errors are reported as
+    # LoggingConfigError too, so callers that degrade gracefully on a bad
+    # logging config (core_service.build_core) have one exception to catch.
+    try:
+        with path.open("r", encoding="utf-8") as fh:
+            data = yaml.safe_load(fh) or {}
+    except (OSError, yaml.YAMLError) as exc:
+        raise LoggingConfigError(f"logging config {path} could not be read: {exc}") from exc
     if not isinstance(data, dict):
         raise LoggingConfigError(
             f"logging config {path} must contain a YAML mapping at the top level"
@@ -67,11 +73,7 @@ def load_logging_config(path: Path) -> LoggingConfig:
     """
     data = _read_yaml(path)
 
-    level = str(data.get("level", "INFO")).upper()
-    if level not in _LEVEL_NAMES:
-        raise LoggingConfigError(
-            f"logging level must be one of {sorted(_LEVEL_NAMES)}, got {level!r}"
-        )
+    level = _validated_level_name(str(data.get("level", "INFO")))
 
     destinations = data.get("destinations", ["stdout"])
     if isinstance(destinations, str):
@@ -132,20 +134,26 @@ def configure_logging(
       file, including its destination list.
 
     A ``config`` object may be passed directly to avoid re-parsing a file
-    that was already validated elsewhere. When both ``config`` and
-    ``level``/``path`` are given, ``config`` wins.
+    that was already validated elsewhere. Precedence when several are
+    given: ``config``, then ``path``, then ``level``.
+
+    Raises :class:`LoggingConfigError` for an unknown level or destination
+    (from any of the three sources) before touching the root logger, so a
+    rejected call leaves the existing logging setup intact.
     """
     if config is None:
         if path is not None:
             config = load_logging_config(path)
+        elif level is not None:
+            config = LoggingConfig(
+                level=level if isinstance(level, str) else _level_name(level),
+            )
         else:
             config = LoggingConfig()
-            if level is not None:
-                config = LoggingConfig(
-                    level=str(level).upper() if isinstance(level, str) else _level_name(level),
-                    destinations=config.destinations,
-                )
 
+    # Re-validated here because LoggingConfig can be constructed directly
+    # and ``level=`` never passes through load_logging_config().
+    level_name = _validated_level_name(config.level)
     streams = [_destination_stream(dest) for dest in config.destinations]
     # logging.basicConfig accepts a single stream/handler; route through
     # a multi-stream handler so 'stdout' + 'stderr' both land in journald
@@ -163,7 +171,17 @@ def configure_logging(
     for handler in new_handlers:
         root.addHandler(handler)
 
-    root.setLevel(getattr(logging, config.level))
+    root.setLevel(getattr(logging, level_name))
+
+
+def _validated_level_name(level: str) -> str:
+    """Normalize a level name to upper case, rejecting anything unknown."""
+    name = level.upper()
+    if name not in _LEVEL_NAMES:
+        raise LoggingConfigError(
+            f"logging level must be one of {sorted(_LEVEL_NAMES)}, got {name!r}"
+        )
+    return name
 
 
 def _level_name(level: int) -> str:
